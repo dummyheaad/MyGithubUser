@@ -1,7 +1,7 @@
 package com.example.mygithubuser
 
+import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Call
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(application: Application) : ViewModel() {
 
     private val _dataUser = MutableLiveData<DetailUserResponse>()
     val dataUser: LiveData<DetailUserResponse> = _dataUser

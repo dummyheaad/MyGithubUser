@@ -1,24 +1,33 @@
 package com.example.mygithubuser
 
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.example.mygithubuser.database.FavoriteUser
 import com.example.mygithubuser.databinding.ActivityDetailBinding
+import com.example.mygithubuser.helper.ViewModelFactory
+import com.example.mygithubuser.insert.FavoriteUserAddDeleteViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var activityDetailBinding: ActivityDetailBinding
-    private val detailViewModel by viewModels<DetailViewModel>()
+    private val detailViewModel by viewModels<DetailViewModel> {
+        ViewModelFactory.getInstance(application)
+    }
+
+    private lateinit var favoriteUserAddDeleteViewModel: FavoriteUserAddDeleteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         activityDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(activityDetailBinding.root)
 
@@ -46,10 +55,40 @@ class DetailActivity : AppCompatActivity() {
 
         supportActionBar?.elevation = 0f
 
-        val bundle = Bundle()
-        bundle.putString("username", username)
+        favoriteUserAddDeleteViewModel = obtainViewModel(this@DetailActivity)
 
-    }
+        val favoriteUser = FavoriteUser()
+        var fabState = BORDER_FAVORITE
+
+        detailViewModel.dataUser.observe(this) {detailUser ->
+            favoriteUser.username = detailUser.login
+            favoriteUser.avatarUrl = detailUser.avatarUrl
+        }
+
+        favoriteUserAddDeleteViewModel.getFavoriteUserByUsername(username).observe(this) { result ->
+            if (result != null) {
+                activityDetailBinding.fabFav.setImageResource(R.drawable.ic_favorite)
+                fabState = FULL_FAVORITE
+            }
+        }
+
+        activityDetailBinding.fabFav.setOnClickListener { view ->
+            if (view.id == R.id.fab_fav) {
+                    if (fabState == BORDER_FAVORITE) {
+                        activityDetailBinding.fabFav.setImageResource(R.drawable.ic_favorite)
+                        favoriteUserAddDeleteViewModel.insert(favoriteUser)
+                        showToast(getString(R.string.add_fav))
+                        fabState = FULL_FAVORITE
+                    }
+                    else if (fabState == FULL_FAVORITE) {
+                        activityDetailBinding.fabFav.setImageResource(R.drawable.ic_favorite_border)
+                        favoriteUserAddDeleteViewModel.delete(favoriteUser)
+                        showToast(getString(R.string.remove_fav))
+                        fabState = BORDER_FAVORITE
+                    }
+                }
+            }
+        }
 
     private fun showLoading(isLoading: Boolean) {
         activityDetailBinding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
@@ -74,11 +113,23 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): FavoriteUserAddDeleteViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[FavoriteUserAddDeleteViewModel::class.java]
+    }
+
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.tab_text_1,
             R.string.tab_text_2
         )
+
+        const val FULL_FAVORITE = "full_favorite"
+        const val BORDER_FAVORITE = "border_favorite"
     }
 }

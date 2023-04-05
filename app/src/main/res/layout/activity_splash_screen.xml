@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashScreenActivity">
+
+    <ImageView
+        android:id="@+id/ivSplashScreen"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:src="@drawable/splash_logo_my_github_user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499"
+        android:contentDescription="@string/splash_logo" />
+
+    <ImageView
+        android:id="@+id/tvSplashScreen"
+        android:layout_width="206dp"
+        android:layout_height="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivSplashScreen"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/splash_text_my_github_user"
+        android:contentDescription="@string/splash_text" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

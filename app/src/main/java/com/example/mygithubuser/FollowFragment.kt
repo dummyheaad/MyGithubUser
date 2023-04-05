@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.mygithubuser.databinding.FragmentFollowBinding
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 class FollowFragment : Fragment() {
@@ -14,7 +14,7 @@ class FollowFragment : Fragment() {
     private var fragmentFollowBinding: FragmentFollowBinding? = null
     private val binding get() = fragmentFollowBinding!!
 
-    private lateinit var followViewModel: FollowViewModel
+    private val followViewModel by viewModels<FollowViewModel>()
 
     private var position: Int = 0
     private var username: String? = ""
@@ -28,7 +28,7 @@ class FollowFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         fragmentFollowBinding = FragmentFollowBinding.inflate(inflater, container, false)
         return binding.root
@@ -40,8 +40,6 @@ class FollowFragment : Fragment() {
             position = it.getInt(ARG_POSITION)
             username = it.getString(ARG_USERNAME)
         }
-
-        followViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[FollowViewModel::class.java]
 
         val layoutManager = LinearLayoutManager(requireActivity())
         fragmentFollowBinding?.rvFollow?.layoutManager = layoutManager

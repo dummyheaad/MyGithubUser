@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">MyGithubUser</string>
+
+    <string name="splash_logo">Splash Screen Logo</string>
+    <string name="splash_text">Splash Screen Text</string>
+
+    <string name="dark_mode">Dark Mode</string>
+
     <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="theme">Setting</string>
+
     <string name="search_hint">Masukkan kata</string>
 
     <string name="followers">%d Followers</string>
@@ -15,9 +24,15 @@
     <string name="total_follower">Total Follower</string>
     <string name="total_following">Total Following</string>
 
-    <string name="title_detail">Detail</string>
+    <string name="title_detail">Detail User</string>
+    <string name="title_main">GitHub User</string>
+    <string name="title_favorite">Favorite User</string>
+    <string name="setting">Setting</string>
 
-    <string name="add_fav">Add to Favorite</string>
+    <string name="add_fav">User has been added to the favorites list</string>
+    <string name="remove_fav">User has been removed from the favorites list</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

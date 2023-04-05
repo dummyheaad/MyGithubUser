@@ -20,59 +20,59 @@ data class GitHubResponse(
 data class ItemsItem(
 
 	@field:SerializedName("gists_url")
-	val gistsUrl: String,
+	val gistsUrl: String = "",
 
 	@field:SerializedName("repos_url")
-	val reposUrl: String,
+	val reposUrl: String = "",
 
 	@field:SerializedName("following_url")
-	val followingUrl: String,
+	val followingUrl: String = "",
 
 	@field:SerializedName("starred_url")
-	val starredUrl: String,
+	val starredUrl: String = "",
 
 	@field:SerializedName("login")
-	val login: String,
+	val login: String = "",
 
 	@field:SerializedName("followers_url")
-	val followersUrl: String,
+	val followersUrl: String = "",
 
 	@field:SerializedName("type")
-	val type: String,
+	val type: String = "",
 
 	@field:SerializedName("url")
-	val url: String,
+	val url: String = "",
 
 	@field:SerializedName("subscriptions_url")
-	val subscriptionsUrl: String,
+	val subscriptionsUrl: String = "",
 
 	@field:SerializedName("score")
-	val score: Double,
+	val score: Double = 0.0,
 
 	@field:SerializedName("received_events_url")
-	val receivedEventsUrl: String,
+	val receivedEventsUrl: String = "",
 
 	@field:SerializedName("avatar_url")
-	val avatarUrl: String,
+	val avatarUrl: String = "",
 
 	@field:SerializedName("events_url")
-	val eventsUrl: String,
+	val eventsUrl: String = "",
 
 	@field:SerializedName("html_url")
-	val htmlUrl: String,
+	val htmlUrl: String = "",
 
 	@field:SerializedName("site_admin")
-	val siteAdmin: Boolean,
+	val siteAdmin: Boolean = true,
 
 	@field:SerializedName("id")
-	val id: Int,
+	val id: Int = 0,
 
 	@field:SerializedName("gravatar_id")
-	val gravatarId: String,
+	val gravatarId: String = "",
 
 	@field:SerializedName("node_id")
-	val nodeId: String,
+	val nodeId: String = "",
 
 	@field:SerializedName("organizations_url")
-	val organizationsUrl: String
+	val organizationsUrl: String = ""
 ) : Parcelable
